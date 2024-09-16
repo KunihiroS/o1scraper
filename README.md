@@ -1,87 +1,92 @@
 # o1scraper
-o1scraperは、ChatGPTの会話から折りたたまれたテキストデータを自動的に抽出し、JSON形式で保存するPythonベースのツールです。Playwrightを使用したウェブ自動化機能を備えており、環境セットアップを自動化することで使いやすさを向上させています。
 
-## 特徴
-- ChatGPT会話からの折りたたまれたテキスト要素の抽出
-- タイムスタンプベースのファイル名でのJSON出力
-- 抽出データのクリーンアップ機能
+o1scraper is a Python-based tool that automatically extracts folded text data from ChatGPT conversations and saves it in JSON format. It features web automation capabilities using Playwright and improves usability by automating environment setup.
 
-## 前提条件
+## Features
+
+- Extraction of folded text elements from ChatGPT conversations
+- JSON output with timestamp-based filenames
+- Cleanup functionality for extracted data
+
+## Prerequisites
+
 - Windows 10
-- Python 3.7以上
-- モダンなウェブブラウザ（例：Microsoft Edge、Google Chrome）
-- ブラウザをリモートデバッグモードで起動する必要があります
+- Python 3.7 or higher
+- Modern web browser (e.g., Microsoft Edge, Google Chrome)
+- Browser must be launched in remote debugging mode
 
-## セットアップ
-1. **リポジトリのクローンまたはダウンロード**
-   
-   このリポジトリをローカルマシンにクローンするか、ZIPファイルとしてダウンロードして解凍してください。
+## Setup
 
-2. **仮想環境の作成とアクティベート**
+1. **Clone or Download the Repository**
    
-   仮想環境を作成してアクティベートしてください：
+   Clone this repository to your local machine or download it as a ZIP file and extract it.
+
+2. **Create and Activate a Virtual Environment**
+   
+   Create and activate a virtual environment:
    ```bash
    python -m venv o1scraper
-   .\o1scraper\Scripts\activate  # Windowsの場合
+   .\o1scraper\Scripts\activate  # For Windows
    ```
 
-3. **依存関係のインストール**
+3. **Install Dependencies**
    
-   仮想環境をアクティベートした状態で、以下のコマンドを実行して依存関係をインストールします：
+   With the virtual environment activated, run the following command to install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-## 使用方法
-1. **ブラウザのリモートデバッグモードでの起動**
+## Usage
+
+1. **Launch Browser in Remote Debugging Mode**
    
-   リモートデバッグを有効にしてブラウザを起動します。以下はMicrosoft Edgeを使用する例です。必要に応じてブラウザのパスやオプションを調整してください。
-   - **Microsoft Edgeの場合**:
+   Start your browser with remote debugging enabled. Here's an example using Microsoft Edge. Adjust the browser path and options as needed.
+   - **For Microsoft Edge**:
      
-     ショートカットを作成し、ターゲットフィールドに以下を追加します：
+     Create a shortcut and add the following to the target field:
      ```
      "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --remote-debugging-port=9222 --user-data-dir="C:\edge_debug"
      ```
      
-     **注**: このコマンドは例です。ブラウザの実行ファイルのパスやオプションは環境に応じて変更してください。重要なのは`--remote-debugging-port=9222`フラグです。
+     **Note**: This command is an example. Modify the browser executable path and options according to your environment. The important flag is `--remote-debugging-port=9222`.
 
-2. **ChatGPT会話ページの準備**
+2. **Prepare ChatGPT Conversation Page**
    
-   ブラウザでChatGPTを開き、データを抽出したい会話ページに移動します。
+   Open ChatGPT in your browser and navigate to the conversation page you want to extract data from.
 
-3. **スクリプトの実行**
+3. **Run the Script**
    
-   コマンドプロンプトを開き、プロジェクトディレクトリに移動してスクリプトを実行します：
+   Open a command prompt, navigate to the project directory, and run the script:
    ```bash
    cd path\to\o1scraper
    python toggleopen.py
    ```
-   トグルをすべて開いた後、以下のコマンドを実行してテキストを抽出します：
+   After opening all toggles, run the following command to extract text:
    ```bash
    python text_extraction.py
    ```
-   最後に、抽出されたJSONファイルをクリーンアップするには以下のコマンドを実行します：
+   Finally, to clean up the extracted JSON file, run:
    ```bash
    python json_cleaner.py
    ```
 
-## 出力
-- 抽出されたデータは、`extracted_data/`ディレクトリ内にタイムスタンプベースのファイル名（例：`extracted_data_1726404502.json`）で保存されます。
-- クリーンアップされたデータは、`extracted_data/cleaned/`ディレクトリに保存されます。
+## Output
 
-## トラブルシューティング
-- **スクリプトがChatGPTページを見つけられない場合**:
-  - ブラウザがリモートデバッグモードで起動されていることを確認してください。
-  - ChatGPTの会話ページが正しく開かれているか確認してください。
-- **依存関係に関連する問題**:
-  - 仮想環境をアクティベートした後に、手動で以下をインストールしてみてください：
+- Extracted data is saved in the `extracted_data/` directory with timestamp-based filenames (e.g., `extracted_data_1726404502.json`).
+- Cleaned data is saved in the `extracted_data/cleaned/` directory.
+
+## Troubleshooting
+
+- **If the script can't find the ChatGPT page**:
+  - Ensure the browser is launched in remote debugging mode.
+  - Check that the ChatGPT conversation page is correctly opened.
+- **Dependency-related issues**:
+  - After activating the virtual environment, try manually installing:
   ```bash
   pip install playwright
   playwright install chromium
   ```
 
-## ライセンス
-このプロジェクトはMITライセンスの下でライセンスされています。詳細については、[LICENSE](LICENSE)ファイルを参照してください。
+## Disclaimer
 
-## 免責事項
-このツールは教育目的のみで使用してください。スクリプトを使用する際は、OpenAIの利用規約および適用される法律や規制を遵守してください。
+Use this tool for educational purposes only. When using the script, comply with OpenAI's terms of service and applicable laws and regulations.
